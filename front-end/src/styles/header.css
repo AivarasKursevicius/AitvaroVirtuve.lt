@@ -1,0 +1,19 @@
+.flex-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 250px;
+}
+
+.ui.marginRight {
+  margin-right: 10px;
+}
+
+.ui.marginTop {
+  margin-top: 40px;
+}
