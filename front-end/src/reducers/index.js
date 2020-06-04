@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 
+import headerReducer from "./headerReducer";
+
 export default combineReducers({
-  replaceMe: "helo",
+  header: headerReducer,
 });
