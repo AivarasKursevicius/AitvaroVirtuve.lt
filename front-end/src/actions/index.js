@@ -19,7 +19,6 @@ export const logoBtn = () => {
 };
 
 export const searchValue = (input) => {
-  console.log(input);
   return {
     type: SEARCH_VALUE,
     payload: input,

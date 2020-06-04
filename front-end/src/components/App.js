@@ -10,7 +10,7 @@ import history from "../history";
 
 const App = () => {
   return (
-    <div style={{ backgroundColor: "lightBlue" }}>
+    <div id="_app" style={{ backgroundColor: "lightBlue" }}>
       <Router history={history}>
         <div className="ui justified container">
           <Header />
