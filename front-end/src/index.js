@@ -8,6 +8,7 @@ import reducers from "./reducers";
 import "./styles/header.css";
 import "./styles/recipeHome.css";
 import "./styles/fonts.css";
+import Fbase from "./firebase/Fbase";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(

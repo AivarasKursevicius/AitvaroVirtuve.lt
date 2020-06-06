@@ -12,9 +12,13 @@ body {
   font-size: 2rem;
 }
 
+span {
+  font-size: 1.2rem;
+}
+
 #_headerButton .textBlack {
   color: black;
   font-family: "Amatic SC";
   font-weight: bolder;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }

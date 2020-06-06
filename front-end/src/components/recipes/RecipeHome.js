@@ -6,7 +6,7 @@ import RecipeTypeItem from "./RecipeTypeItem";
 const RecipeHome = () => {
   return (
     <div id="_recipeHome" className="row">
-      <div className="main">
+      <div className="main ui segment">
         <RecipeIntro />
       </div>
       <div className="side">
@@ -14,11 +14,7 @@ const RecipeHome = () => {
           <i className="food icon"></i>
           Tipai
         </h2>
-        <div className="ui divided middle aligned list">
-          <RecipeTypeItem />
-          <RecipeTypeItem />
-          <RecipeTypeItem />
-          <RecipeTypeItem />
+        <div className="ui divided animated middle aligned list">
           <RecipeTypeItem />
         </div>
       </div>

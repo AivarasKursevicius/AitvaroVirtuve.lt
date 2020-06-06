@@ -1,31 +1,32 @@
 import React from "react";
-import faker from "faker";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchRecipes } from "../../actions";
 
 class RecipeIntro extends React.Component {
-  state = { img: "" };
-
   componentDidMount() {
     this.props.fetchRecipes();
   }
 
   renderRecipes() {
     return this.props.recipes.map((recipe) => {
+      const styleForImg = {
+        background: `url(${recipe.images[0]})`,
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        backgroundSize: "cover",
+      };
+
+      console.log(recipe);
       return (
         <div key={recipe.id}>
+          <h2>{recipe.name}</h2>
           <Link to={`/recipes/${recipe.id}`}>
-            <h2>{recipe.name}</h2>
-
-            <img
-              className="fakeimg text"
-              src={faker.image.food()}
-              alt="a"
-              style={{ height: "200px" }}
-            />
+            <div className="imageWithDesc" style={styleForImg}>
+              <span>{recipe.description}</span>
+            </div>
           </Link>
-          <p style={{ marginBottom: "50px" }}>{recipe.description}</p>
+          <div className="ui section divider"></div>
         </div>
       );
     });

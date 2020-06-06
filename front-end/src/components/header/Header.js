@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../images/Logo.png";
 import { Link } from "react-router-dom";
 import SearchBar from "../header/SearchBar";
 import { connect } from "react-redux";
@@ -11,7 +10,7 @@ class Header extends React.Component {
       <React.Fragment>
         <div className="flex-layout">
           <Link onClick={() => this.props.logoBtn()} to="/">
-            <img className="logo" src={logo} alt="logo" />
+            <img className="logo" src="/images/Logo.png" alt="logo" />
           </Link>
           <div id="_headerButton" className="ui boxStyle inverted segment">
             <div className="ui noborder marginTop inverted pointing secondary medium menu">

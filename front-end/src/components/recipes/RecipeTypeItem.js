@@ -1,18 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import faker from "faker";
+import FOOD_TYPE, { PNG, FOOD_ICON_PATH } from "../../constants";
+import recipes from "../../apis/recipes";
 
 const RecipeTypeItem = () => {
-  return (
-    <div className="item">
-      <img src={faker.image.avatar()} alt="a" className="ui tiny image" />
-      <div className="content vb">
-        <Link to="/recipes/:id" className="customText">
-          Patiekalo Tipas
-        </Link>
+  return FOOD_TYPE.map((item) => {
+    const { id, name, icon, type } = item;
+
+    const fetchRecipeByType = async (type) => {
+      const response = await recipes.get(`/recipes/type/${type}`);
+      console.log(response);
+    };
+    return (
+      <div key={id} className="item">
+        <img
+          src={FOOD_ICON_PATH + icon + PNG}
+          alt={name}
+          className="ui tiny image"
+        />
+        <div className="content vb">
+          <Link
+            to={`/recipes/all`}
+            onClick={() => fetchRecipeByType(type)}
+            className="customText"
+          >
+            {name}
+          </Link>
+        </div>
       </div>
-    </div>
-  );
+    );
+  });
 };
 
 export default RecipeTypeItem;

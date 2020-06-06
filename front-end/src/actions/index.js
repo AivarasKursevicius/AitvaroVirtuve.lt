@@ -6,6 +6,7 @@ import {
   FETCH_RECIPE,
   FETCH_RECIPES,
   CREATE_RECIPE,
+  FETCH_RECIPES_BY_TYPE,
 } from "./types";
 import recipes from "../apis/recipes";
 import history from "../history";
@@ -39,6 +40,12 @@ export const fetchRecipe = (id) => async (dispatch) => {
   const response = await recipes.get(`/recipes/${id}`);
 
   dispatch({ type: FETCH_RECIPE, payload: response.data });
+};
+
+export const fetchRecipesByType = (type) => async (dispatch) => {
+  const response = await recipes.get(`/recipes/type/${type}`);
+
+  dispatch({ type: FETCH_RECIPES_BY_TYPE, payload: response.data });
 };
 
 export const fetchRecipes = () => async (dispatch) => {
