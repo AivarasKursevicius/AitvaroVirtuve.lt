@@ -8,8 +8,6 @@ const RecipeHome = () => {
     <div id="_recipeHome" className="row">
       <div className="main">
         <RecipeIntro />
-        <RecipeIntro />
-        <RecipeIntro />
       </div>
       <div className="side">
         <h2 className="ui horizontal divider header">

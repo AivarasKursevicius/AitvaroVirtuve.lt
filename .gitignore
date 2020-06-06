@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+/shelf/
+/workspace.xml
+.idea/
+.mvn/
+target/
+HELP.md
+mvnw
+mvnw.cmd
+restful-web-services.iml
