@@ -8,26 +8,21 @@ const RecipeTypeItem = () => {
     const { id, name, icon, type } = item;
 
     const fetchRecipeByType = async (type) => {
-      const response = await recipes.get(`/recipes/type/${type}`);
-      console.log(response);
+      const response = await recipes.get(`/recipes/type:${type}`);
     };
     return (
-      <div key={id} className="item">
-        <img
-          src={FOOD_ICON_PATH + icon + PNG}
-          alt={name}
-          className="ui tiny image"
-        />
-        <div className="content vb">
-          <Link
-            to={`/recipes/all`}
-            onClick={() => fetchRecipeByType(type)}
-            className="customText"
-          >
-            {name}
-          </Link>
+      <Link to={"/recipes/all"} onClick={() => fetchRecipeByType(type)}>
+        <div className="ui divided animated middle aligned list">
+          <div key={id} className="item">
+            <img
+              src={FOOD_ICON_PATH + icon + PNG}
+              alt={name}
+              className="ui tiny image"
+            />
+            <div className="content vb customText">{name}</div>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   });
 };

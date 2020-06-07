@@ -10,8 +10,9 @@ class RecipeIntro extends React.Component {
 
   renderRecipes() {
     return this.props.recipes.map((recipe) => {
+      console.log(recipe);
       const styleForImg = {
-        background: `url(${recipe.images[0]})`,
+        background: `url("http://localhost:6039/image.jpeg")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",

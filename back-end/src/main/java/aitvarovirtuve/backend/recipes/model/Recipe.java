@@ -1,4 +1,4 @@
-package aitvarovirtuve.backend.model;
+package aitvarovirtuve.backend.recipes.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,7 +14,8 @@ public class Recipe {
   private List ingredient;
   private String difficulty;
   private String time;
-  private String type;
+  private List images;
+  private List type;
   private String authorName;
   private String authorEmail;
 
@@ -25,7 +26,8 @@ public class Recipe {
       List ingredient,
       String difficulty,
       String time,
-      String type,
+      List images,
+      List type,
       String authorName,
       String authorEmail) {
     this.id = id;
@@ -34,6 +36,7 @@ public class Recipe {
     this.ingredient = ingredient;
     this.difficulty = difficulty;
     this.time = time;
+    this.images = images;
     this.type = type;
     this.authorName = authorName;
     this.authorEmail = authorEmail;
@@ -63,7 +66,9 @@ public class Recipe {
     return time;
   }
 
-  public String getType() {
+  public List getImages(){return images;}
+
+  public List getType() {
     return type;
   }
 

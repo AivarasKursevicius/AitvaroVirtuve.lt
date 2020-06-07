@@ -14,9 +14,8 @@ const RecipeHome = () => {
           <i className="food icon"></i>
           Tipai
         </h2>
-        <div className="ui divided animated middle aligned list">
-          <RecipeTypeItem />
-        </div>
+
+        <RecipeTypeItem />
       </div>
     </div>
   );
