@@ -15,4 +15,19 @@ const FOOD_TYPE = [
   { id: 10, name: "Kam patinka aštriai", icon: "chili", type: "CHILI" },
 ];
 
+export const RECIPE_DETAILS = {
+  name: "Recepto pavadinimas",
+  description: "Recepto aprašymas",
+  ingredients: "Ingredientai",
+  time: "Gaminimo laikas",
+  type: "Patiekalo tipas",
+  difficulty: "Gaminimo sudetingumas",
+  uploadImg: "Įkelti nuotrauka",
+  authorName: "Autoriaus vardas",
+  authorEmail: "Autoriaus el-paštas",
+  uploadForm: "Įkelti nauja recepta",
+};
+
+export const TEXTAREA_ROWS = 6;
+
 export default FOOD_TYPE;

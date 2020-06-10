@@ -1,16 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchRecipes } from "../../actions";
+import getAllRecipes from "../../hooks/getAllRecipes";
 
-class RecipeIntro extends React.Component {
-  componentDidMount() {
-    this.props.fetchRecipes();
-  }
+const RecipeIntro = () => {
+  const [recipes] = getAllRecipes();
 
-  renderRecipes() {
-    return this.props.recipes.map((recipe) => {
-      console.log(recipe);
+  const renderRecipes = (recipes) => {
+    return recipes.map((recipe) => {
       const styleForImg = {
         background: `url("http://localhost:6039/image.jpeg")`,
         backgroundRepeat: "no-repeat",
@@ -18,7 +14,6 @@ class RecipeIntro extends React.Component {
         backgroundSize: "cover",
       };
 
-      console.log(recipe);
       return (
         <div key={recipe.id}>
           <h2>{recipe.name}</h2>
@@ -31,15 +26,8 @@ class RecipeIntro extends React.Component {
         </div>
       );
     });
-  }
-
-  render() {
-    return <React.Fragment>{this.renderRecipes()}</React.Fragment>;
-  }
-}
-
-const mapStateToProps = (state) => {
-  return { recipes: Object.values(state.recipe) };
+  };
+  return <div className="main ui segment">{renderRecipes(recipes)}</div>;
 };
 
-export default connect(mapStateToProps, { fetchRecipes })(RecipeIntro);
+export default RecipeIntro;

@@ -56,7 +56,7 @@ export const fetchRecipes = () => async (dispatch) => {
 
 export const createRecipe = (formValues) => async (dispatch) => {
   const response = await recipes.post("/recipes/create", { ...formValues });
-
+  console.log(formValues);
   dispatch({ type: CREATE_RECIPE, payload: response.data });
   history.push("/");
 };

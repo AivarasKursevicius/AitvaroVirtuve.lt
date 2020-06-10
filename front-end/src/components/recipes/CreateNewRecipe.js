@@ -1,7 +1,24 @@
 import React from "react";
+import { connect } from "react-redux";
+import { createRecipe } from "../../actions";
 
-const CreateNewRecipe = () => {
-  return <div>CreateNewRecipe</div>;
-};
+import RecipeForm from "./RecipeForm";
 
-export default CreateNewRecipe;
+class CreateNewRecipe extends React.Component {
+  onSubmit = (formValues) => {
+    this.props.createRecipe(formValues);
+  };
+
+  render() {
+    return (
+      <div>
+        <h2 style={{ fontWeight: "bolder", textAlign: "center" }}>
+          Naujas receptas
+        </h2>
+        <RecipeForm onSubmit={this.onSubmit} />
+      </div>
+    );
+  }
+}
+
+export default connect(null, { createRecipe })(CreateNewRecipe);

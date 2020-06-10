@@ -9,11 +9,16 @@ const RecipeTypeItem = () => {
 
     const fetchRecipeByType = async (type) => {
       const response = await recipes.get(`/recipes/type:${type}`);
+      return response;
     };
     return (
-      <Link to={"/recipes/all"} onClick={() => fetchRecipeByType(type)}>
+      <Link
+        key={id}
+        to={"/recipes/all"}
+        onClick={() => fetchRecipeByType(type)}
+      >
         <div className="ui divided animated middle aligned list">
-          <div key={id} className="item">
+          <div className="item">
             <img
               src={FOOD_ICON_PATH + icon + PNG}
               alt={name}
