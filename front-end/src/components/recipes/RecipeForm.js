@@ -1,7 +1,7 @@
 import React from "react";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import { RECIPE_DETAILS, TEXTAREA_ROWS } from "../../constants";
-
+import { Dropdown } from "semantic-ui-react";
 class RecipeForm extends React.Component {
   onSubmit = (formValues) => {
     // this.props.onSubmit(formValues);
@@ -51,7 +51,7 @@ class RecipeForm extends React.Component {
     return (
       <>
         <input placeholder={label} autoComplete="off" {...input} />
-        {meta.touched ? (
+        {meta.touched && meta.error ? (
           <div className="ui error left pointing  prompt label err">
             <div className="header">{meta.error}</div>
           </div>
@@ -60,37 +60,61 @@ class RecipeForm extends React.Component {
     );
   };
 
-  renderIngredientsList = ({ fields, label, meta }) => (
-    <div>
-      <div className="field">
-        <div className="ui field horizontal divider">
-          <label>{label}</label>
-          {this.renderError(meta)}
+  renderIngredientsList = ({ fields, label, meta }) => {
+    console.log(meta.error);
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+    return (
+      <div>
+        <div className={className}>
+          <div className="ui field horizontal divider">
+            <label>{label}</label>
+            {this.renderError(meta)}
+          </div>
+          <div onClick={() => fields.push()} className="ui label addIcon">
+            <i aria-hidden="true" className="plus icon"></i>
+            Pridėti
+          </div>
         </div>
-        <div onClick={() => fields.push()} className="ui label addIcon">
-          <i aria-hidden="true" className="plus icon"></i>
-          Pridėti
-        </div>
-      </div>
-      {fields.map((ingredient, index) => (
-        <div className="ui field icon input listItem" key={index}>
-          <Field
-            name={`${ingredient}.ingredient`}
-            type="text"
-            component={this.renderListInput}
-            label={index + 1}
-            onClick={fields.remove}
-          />
+        {fields.map((ingredient, index) => (
+          <div className="ui field icon input listItem" key={index}>
+            <Field
+              name={`${ingredient}.ingredient`}
+              type="text"
+              component={this.renderListInput}
+              label={index + 1}
+              onClick={fields.remove}
+            />
 
-          <i
-            onClick={() => fields.remove(index)}
-            aria-hidden="true"
-            className="trash alternate circular inverted link icon red aaa"
-          ></i>
+            <i
+              onClick={() => fields.remove(index)}
+              aria-hidden="true"
+              className="trash alternate circular inverted link icon red aaa"
+            ></i>
+          </div>
+        ))}
+      </div>
+    );
+  };
+  renderDropdown = ({ input, label, meta }) => {
+    const { time } = RECIPE_DETAILS;
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <div className="ui horizontal divider">
+          <label>{label}</label>
         </div>
-      ))}
-    </div>
-  );
+        <Dropdown
+          selection
+          {...input}
+          fluid
+          options={time.options}
+          value={input.value}
+          onChange={(param, data) => input.onChange(data.value)}
+        />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
 
   render() {
     const {
@@ -117,7 +141,6 @@ class RecipeForm extends React.Component {
             <Field
               name="description"
               component={this.renderInputText}
-              aaa={true}
               label={description}
             />
             <FieldArray
@@ -136,6 +159,11 @@ class RecipeForm extends React.Component {
               name="authorEmail"
               component={this.renderInputText}
               label={authorEmail}
+            />
+            <Field
+              name={time.name}
+              label={time.title}
+              component={this.renderDropdown}
             />
           </div>
         </div>
@@ -173,6 +201,10 @@ const validate = (formValues) => {
     if (ingredientsArrayErrors.length) {
       errors.ingredients = ingredientsArrayErrors;
     }
+  }
+
+  if (!formValues.time) {
+    errors.time = "Pasirinkite gaminimo laika";
   }
 
   return errors;

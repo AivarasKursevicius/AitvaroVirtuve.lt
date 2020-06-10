@@ -19,7 +19,17 @@ export const RECIPE_DETAILS = {
   name: "Recepto pavadinimas",
   description: "Recepto aprašymas",
   ingredients: "Ingredientai",
-  time: "Gaminimo laikas",
+  time: {
+    title: "Gaminimo laikas",
+    name: "time",
+    options: [
+      { key: 1, text: "Iki 15 minučių", value: 15 },
+      { key: 2, text: "Iki 30 minučių", value: 30 },
+      { key: 3, text: "Iki 45 minučių", value: 45 },
+      { key: 4, text: "Iki 1 valanda", value: 60 },
+      { key: 5, text: "Virš 1 valandos", value: 99 },
+    ],
+  },
   type: "Patiekalo tipas",
   difficulty: "Gaminimo sudetingumas",
   uploadImg: "Įkelti nuotrauka",
