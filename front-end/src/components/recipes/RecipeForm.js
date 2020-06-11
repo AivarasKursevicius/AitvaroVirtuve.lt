@@ -61,10 +61,9 @@ class RecipeForm extends React.Component {
   };
 
   renderIngredientsList = ({ fields, label, meta }) => {
-    console.log(meta.error);
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
     return (
-      <div>
+      <div style={{ marginBottom: "50px" }}>
         <div className={className}>
           <div className="ui field horizontal divider">
             <label>{label}</label>
@@ -95,23 +94,37 @@ class RecipeForm extends React.Component {
       </div>
     );
   };
-  renderDropdown = ({ input, label, meta }) => {
-    const { time } = RECIPE_DETAILS;
+  renderDropdown = ({ input, label, meta, options }) => {
     const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+    const { type } = RECIPE_DETAILS;
+    const multiDropdown =
+      label === type.title
+        ? { boolean: true, value: input.value || [] }
+        : { boolean: false, value: input.value };
     return (
-      <div className={className}>
+      <div style={{ marginBottom: "50px" }} className={className}>
         <div className="ui horizontal divider">
           <label>{label}</label>
         </div>
         <Dropdown
+          key={options.key}
           selection
           {...input}
           fluid
-          options={time.options}
-          value={input.value}
+          multiple={multiDropdown.boolean}
+          options={options}
+          value={multiDropdown.value}
           onChange={(param, data) => input.onChange(data.value)}
         />
         {this.renderError(meta)}
+      </div>
+    );
+  };
+
+  renderImageUploader = ({ input, label, meta }) => {
+    return (
+      <div className="ui horizontal divider">
+        <label>{label}</label>
       </div>
     );
   };
@@ -148,6 +161,18 @@ class RecipeForm extends React.Component {
               label={ingredients}
               component={this.renderIngredientsList}
             />
+            <Field
+              props={time}
+              name={time.name}
+              label={time.title}
+              component={this.renderDropdown}
+            />
+            <Field
+              props={type}
+              name={type.name}
+              label={type.title}
+              component={this.renderDropdown}
+            />
           </div>
           <div className="side">
             <Field
@@ -160,10 +185,17 @@ class RecipeForm extends React.Component {
               component={this.renderInputText}
               label={authorEmail}
             />
+
             <Field
-              name={time.name}
-              label={time.title}
+              props={difficulty}
+              name={difficulty.name}
+              label={difficulty.title}
               component={this.renderDropdown}
+            />
+            <Field
+              name="images"
+              label={uploadImg}
+              component={this.renderImageUploader}
             />
           </div>
         </div>
@@ -205,6 +237,14 @@ const validate = (formValues) => {
 
   if (!formValues.time) {
     errors.time = "Pasirinkite gaminimo laika";
+  }
+
+  if (!formValues.type) {
+    errors.type = "Pasirinkite patiekalo tipa arba tipus";
+  }
+
+  if (!formValues.difficulty) {
+    errors.difficulty = "Pasirinkite gaminimo sudetingumas";
   }
 
   return errors;
