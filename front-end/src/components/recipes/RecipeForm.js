@@ -21,6 +21,12 @@ class RecipeForm extends React.Component {
             <div className="header">{meta.error}</div>
           </div>
         );
+      } else if (meta.invalid && meta.dirty) {
+        return (
+          <div className="ui error pointing prompt label err">
+            <div className="header">{meta.error}</div>
+          </div>
+        );
       }
     } else if (meta.error && meta.submitFailed === true) {
       return (
@@ -157,6 +163,7 @@ class RecipeForm extends React.Component {
     } = RECIPE_DETAILS;
     return (
       <form
+        autoComplete="off"
         id="_form"
         onSubmit={this.props.handleSubmit(this.onSubmit)}
         className="ui form error"
@@ -262,7 +269,10 @@ const validate = (formValues) => {
   }
   if (!formValues.images || formValues.images === []) {
     errors.images = "Įkelkite patiekalo nuotrauka bent viena";
+  } else if (formValues.images.length > 5) {
+    errors.images = "Maksimum 4 nuotraukas galima įkelti";
   }
+
   return errors;
 };
 

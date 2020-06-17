@@ -25,7 +25,7 @@ function MyDropzone({ input, label, meta, renderError }) {
   };
 
   function dropImg() {
-    if (acceptedFiles.length === 0) {
+    if (acceptedFiles.length === 0 || acceptedFiles.length > 5) {
       const active = isDragActive ? { opacity: "0.5" } : { opacity: "0.3" };
       return (
         <p>
@@ -42,6 +42,34 @@ function MyDropzone({ input, label, meta, renderError }) {
     }
   }
 
+  function renderPreview() {
+    if (acceptedFiles.length < 5) {
+      return acceptedFiles.map((file, index) => {
+        if (index === 0) {
+          return (
+            <img
+              className="imgGridSpan previewImg"
+              key={index}
+              src={file.preview}
+              alt={file.name}
+            />
+          );
+        } else {
+          return (
+            <img
+              className="previewImg"
+              key={index}
+              src={file.preview}
+              alt={file.name}
+            />
+          );
+        }
+      });
+    } else {
+      dropImg();
+    }
+  }
+
   return (
     <div className="field">
       <div className="ui horizontal divider">
@@ -50,29 +78,7 @@ function MyDropzone({ input, label, meta, renderError }) {
       <div {...getRootProps()} id="_dropzone">
         <input {...getInputProps()} />
         {dropImg()}
-        <div className="imgGrid">
-          {acceptedFiles.map((file, index) => {
-            if (index === 0) {
-              return (
-                <img
-                  className="imgGridSpan previewImg"
-                  key={index}
-                  src={file.preview}
-                  alt={file.name}
-                />
-              );
-            } else {
-              return (
-                <img
-                  className="previewImg"
-                  key={index}
-                  src={file.preview}
-                  alt={file.name}
-                />
-              );
-            }
-          })}
-        </div>
+        <div className="imgGrid">{renderPreview()}</div>
       </div>
       {renderError(meta)}
     </div>
