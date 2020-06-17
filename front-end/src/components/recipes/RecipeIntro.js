@@ -7,7 +7,7 @@ const RecipeIntro = () => {
   const renderRecipes = (recipes) => {
     return recipes.map((recipe) => {
       const styleForImg = {
-        background: `url("http://localhost:6039/image.jpeg")`,
+        background: `url("${recipe.images[0].uri}")`,
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
         backgroundSize: "cover",

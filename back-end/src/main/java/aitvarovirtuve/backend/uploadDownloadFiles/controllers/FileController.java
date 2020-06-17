@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@CrossOrigin("*")
 @RestController
 public class FileController {
 
@@ -65,7 +65,7 @@ public class FileController {
 
     @PostMapping("/upload-multiple-files")
     @ResponseBody
-    public List<FileResponse> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
+    public List<FileResponse> uploadMultipleFiles(@RequestParam("files[]") MultipartFile[] files) {
         return Arrays.stream(files)
                 .map(file -> uploadFile(file))
                 .collect(Collectors.toList());
