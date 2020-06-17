@@ -2,9 +2,14 @@ import React from "react";
 import { Field, FieldArray, reduxForm } from "redux-form";
 import { RECIPE_DETAILS, TEXTAREA_ROWS } from "../../constants";
 import { Dropdown } from "semantic-ui-react";
+import MyDropzone from "./RenderDropZoneInput";
+import Service from "../../Service";
+
 class RecipeForm extends React.Component {
-  onSubmit = (formValues) => {
-    // this.props.onSubmit(formValues);
+  onSubmit = async (formValues) => {
+    const response = await Service.upload(formValues.images);
+    formValues.images = response.data;
+    this.props.onSubmit(formValues);
     console.log(formValues);
   };
 
@@ -18,6 +23,12 @@ class RecipeForm extends React.Component {
         );
       }
     } else if (meta.error && meta.submitFailed === true) {
+      return (
+        <div className="ui error pointing prompt label err">
+          <div className="header">{meta.error}</div>
+        </div>
+      );
+    } else if (!meta.valid && meta.submitFailed === false) {
       return (
         <div className="ui error pointing prompt label err">
           <div className="header">{meta.error}</div>
@@ -121,11 +132,13 @@ class RecipeForm extends React.Component {
     );
   };
 
-  renderImageUploader = ({ input, label, meta }) => {
+  renderImageUploader = (formValues) => {
     return (
-      <div className="ui horizontal divider">
-        <label>{label}</label>
-      </div>
+      <React.Fragment>
+        <div className="ui horizontal divider">
+          <label>{formValues.label}</label>
+        </div>
+      </React.Fragment>
     );
   };
 
@@ -193,9 +206,10 @@ class RecipeForm extends React.Component {
               component={this.renderDropdown}
             />
             <Field
-              name="images"
+              renderError={this.renderError}
               label={uploadImg}
-              component={this.renderImageUploader}
+              name="images"
+              component={MyDropzone}
             />
           </div>
         </div>
@@ -246,7 +260,9 @@ const validate = (formValues) => {
   if (!formValues.difficulty) {
     errors.difficulty = "Pasirinkite gaminimo sudetingumas";
   }
-
+  if (!formValues.images || formValues.images === []) {
+    errors.images = "Įkelkite patiekalo nuotrauka bent viena";
+  }
   return errors;
 };
 

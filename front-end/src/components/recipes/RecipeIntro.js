@@ -4,7 +4,6 @@ import getAllRecipes from "../../hooks/getAllRecipes";
 
 const RecipeIntro = () => {
   const [recipes] = getAllRecipes();
-
   const renderRecipes = (recipes) => {
     return recipes.map((recipe) => {
       const styleForImg = {

@@ -1,0 +1,37 @@
+#_dropzone {
+  max-height: unset;
+  max-width: unset;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  display: flex;
+  min-height: 200px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 10px;
+  border: 2px dashed black;
+}
+
+.imgGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 5px;
+  max-width: 95%;
+  margin: auto;
+}
+
+.imgGridSpan {
+  grid-column: span 3 / auto;
+}
+
+.previewImg {
+  width: 100%;
+  max-height: 200px;
+  /* border-radius: 10px; */
+}
+
+#_dropzone p {
+  width: 100%;
+}

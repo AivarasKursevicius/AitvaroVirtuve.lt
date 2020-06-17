@@ -9,6 +9,7 @@ import "./styles/header.css";
 import "./styles/recipeHome.css";
 import "./styles/fonts.css";
 import "./styles/form.css";
+import "./styles/dropzone.css";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
